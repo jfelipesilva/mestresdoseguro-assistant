@@ -1,0 +1,42 @@
+services:
+  openclaw:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mestresdoseguro-assistant
+    restart: unless-stopped
+    command: ["/app/entrypoint.sh"]
+    ports:
+      - "127.0.0.1:${OPENCLAW_PORT:-18790}:18790"
+    volumes:
+      - ./entrypoint.sh:/app/entrypoint.sh:ro
+      - ./config/openclaw.json:/app/openclaw.json.seed:ro
+      - ./config/openclaw-live.json:/root/.openclaw/openclaw.json
+      - ./agentes:/root/.openclaw/agentes
+      - ./state:/root/.openclaw/state
+      - ./credentials:/root/.openclaw/credentials
+      - ./devices:/root/.openclaw/devices
+      - ./agents:/root/.openclaw/agents
+      - ./historico-conversas:/root/.openclaw/historico-conversas
+      - ./hooks:/root/.openclaw/hooks
+      - ./codigos-fonte:/root/.openclaw/codigos-fonte:ro
+      - ./commit-queue:/app/commit-queue
+      - ./scripts:/app/scripts:ro
+      - openclaw-data:/root/.openclaw/.openclaw
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:18790/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  openclaw-data:
+    driver: local

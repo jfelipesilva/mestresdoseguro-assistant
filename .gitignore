@@ -1,0 +1,12 @@
+.env
+credentials/
+devices/
+agents/
+state/
+config/openclaw-live.json
+commit-queue/*.json
+commit-queue/*.result
+commit-queue/watcher.log
+openclaw-data/
+node_modules/
+*.log
