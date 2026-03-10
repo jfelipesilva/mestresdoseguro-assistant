@@ -6,8 +6,7 @@ services:
     container_name: mestresdoseguro-assistant
     restart: unless-stopped
     command: ["/app/entrypoint.sh"]
-    ports:
-      - "127.0.0.1:${OPENCLAW_PORT:-18790}:18790"
+    network_mode: host
     volumes:
       - ./entrypoint.sh:/app/entrypoint.sh:ro
       - ./config/openclaw.json:/app/openclaw.json.seed:ro

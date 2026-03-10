@@ -6,7 +6,7 @@
 
 set -euo pipefail
 
-REPO_DIR="/home/mestresdoseguro/mestresdoseguro-assistant"
+REPO_DIR="/home/assistentemestre/mestresdoseguro-assistant"
 cd "$REPO_DIR"
 
 COMMIT_MSG="${1:-}"

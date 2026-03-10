@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-REPO_DIR="/home/mestresdoseguro/mestresdoseguro-assistant"
+REPO_DIR="/home/assistentemestre/mestresdoseguro-assistant"
 QUEUE_DIR="$REPO_DIR/commit-queue"
 LOG_FILE="$REPO_DIR/commit-queue/watcher.log"
 
